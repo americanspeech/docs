@@ -49,6 +49,10 @@
     {{\fontspec{Times New Roman}\fontsize{#2}{\dimexpr 1.15pt * #2pt\relax}\selectfont #1}}
 }
 
+\newcommand{\p}[1]{
+    {#1}\vspace{\subregspacing}\\
+}
+
 \begin{document}
 
 %  Title Page
@@ -70,10 +74,10 @@
 {\noindent\timestext{What's New This Year}{20pt}{true}}\vspace{\hispacing}\\
 
 \phantomsection\label{subsec:General}\addcontentsline{toc}{subsection}{General}
-\timestext{General}{16pt}{false}
+\noindent\timestext{General}{16pt}{false}
 
 \begin{itemize}
-    \item Core Values: Conversational, Collaborative, Kind.
+    \item Core Values: Conversational, Collaborative, Kind. (\textcolor{blue}{\uline{\hyperref[subsec:CoreValues]{Page 4}}})
     \item Adult Representatives are required at tournaments for all students.
     \item One adult may represent no more than four students.
     \item Judge Recruitment is the responsibility of every competitor and coach.
@@ -102,7 +106,7 @@
 \textcolor{HeaderGrey}{\timestext{2024-2025 ASDA Lincoln-Douglas Debate Resolution}{14pt}{false}}\vspace{\subregspacing}\\
 {In the United States criminal justice system, jury nullification ought to be used in the face of perceived \\injustice.}\vspace{\regspacing}
 
-\noindent\textcolor{HeaderGrey}{\timestext{2024-2025 ASDA Team Policy Debate Resolution}{14pt}{false}}\vspace{\subregspacing}
+\noindent\textcolor{HeaderGrey}{\timestext{2024-2025 ASDA Team Policy Debate Resolution}{14pt}{false}}\vspace{\subregspacing}\\
 {The United States Federal Government should significantly reform its foreign policy toward one or more of the following countries: Belize, Guatemala, Honduras, El Salvador, Nicaragua, and Costa Rica.}
 
 \newpage
@@ -121,12 +125,38 @@
 }
 \makeatother
 
-\setcounter{tocdepth}{2}
+{\setcounter{tocdepth}{2}
+\hypersetup{linkcolor=black}
 \tableofcontents
+}
 
 \newpage
 
 %  Page 5
 \phantomsection\label{sec:MissionStatement}\addcontentsline{toc}{section}{Mission Statement}
-\noindent\timestext{1. Mission Statement}{20}{true}
+\noindent\timestext{1. Mission Statement}{20}{true}\vspace{\regspacing}\\
+\p{American Speech and Debate Association’s mission is to prepare the next generation of leaders by providing competitive speech and debate events where youth learn to communicate their ideas, beliefs and values effectively while maintaining respect for differing views.}
+{To accomplish this mission, ASDA:}\vspace{\lowspacing}
+\begin{itemize}
+    \item Embraces those values found in the Declaration of Independence and the Constitution such as freedom of speech and religion.
+    \item Cultivates an atmosphere of collaboration and congeniality where freedom of conscience in all religious beliefs and political stances is honored.
+    \item Welcomes youth from all learning environments.
+\end{itemize}\vspace{\regspacing}
+
+\phantomsection\label{sec:CoreValues}\addcontentsline{toc}{section}{Core Values and Conduct}
+\noindent\timestext{2. Core Values and Conduct}{20}{true}\vspace{\regspacing}\\
+\p{ASDA agrees with the Declaration of Independence in claiming that “all men are created equal.” We expect our competitors, judges, coaches, staff, adults and visitors to treat all people with respect and honor and to commit to the following statement of values and tournament conduct.}
+{“In my relationship with ASDA, whether as a competitor, judge, coach, staff, adult or visitor, I commit to upholding our shared core values of being conversational, collaborative, and kind as I honor each person’s free exercise of conscience. Communication is here meant to include mutual understanding as well as peaceably hearing or presenting material that has the ability to generate strong opinions.”}\vspace{\lowspacing}\\
+
+\phantomsection\label{subsec:CoreValues}\addcontentsline{toc}{subsection}{Core Values}
+\noindent\timestext{Core Values}{16}{false}\vspace{\regspacing}\\
+\p{Conversational: “In refining my skills of effective communication, I employ a conversational rate of speaking and style of presentation. I am willing to hear opinions that differ from my own regarding religion, money, health, politics, etc. Competitors, judges, and audience observers listening with an unbiased preconception will be shown that I value being conversational."}
+\p{Collaborative: “I will work peaceably with others to accomplish the mission of American Speech and Debate Association. I will help prepare the next generation of leaders as I attempt to communicate my ideas, beliefs and values effectively while maintaining respect for differing views. I will do my best to help others.”}
+\p{Kind: “I will be kind and polite in all my words to and about other people, whether or not they are present and whether or not I agree with them.”}
+
+\newpage
+
+%  Page 6
+\phantomsection\label{subsec:TourConduct}\addcontentsline{toc}{subsection}{Tournament Code of Conduct}
+\noindent\timestext{Tournament Code of Conduct}{16}{false}\vspace{\regspacing}\\
 \end{document}
