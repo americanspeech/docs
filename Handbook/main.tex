@@ -1,0 +1,132 @@
+\documentclass[11pt]{memoir}    %  Sets document type to memoir to allow access to vplace attribute and sets default font size to 11pt
+\usepackage{graphicx}   %  Required for inserting images
+\usepackage{xcolor}     %  Package for text coloring
+\usepackage[normalem]{ulem} %  Package for underlining
+\usepackage{fontspec}   %  Package for importing new fonts
+\usepackage{fancyhdr}   %  Package for headers and footers
+\usepackage{enumitem}   %  Package for more fine control over item lists
+\usepackage{hyperref}   %  Package to allow in-document navigation
+\usepackage{ifthen}     %  Package for more user friendly if-then statements
+\usepackage{amsmath}    %  Package w/ additional fonts
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}  %  Sets the document's paper type
+
+%  Preamble
+\pagestyle{fancy}   % Suppresses unwanted default styling
+\setmainfont[BoldFont={calibrib.ttf}, ItalicFont={calibrii.ttf}]{calibri.ttf}   %  Sets default fonts to Calibri
+\definecolor{HeaderGrey}{HTML}{434343}  %  Define the grey color used for certain headers
+
+%  Header and footer stuff
+\fancyhf{}  %  Clear header and footer
+\renewcommand{\headrulewidth}{0pt} % Remove the header bar
+\fancyhead[R]{\fontsize{10pt}{10pt}\selectfont \textcolor{blue}{\uline{\hyperref[sec:toc]{Return to Table of Contents}}}\vspace{\subregspacing}\\Page \thepage} %  Right header
+\fancyfoot[R]{\fontsize{9pt}{9pt}\selectfont© 2024 American Speech and Debate Association All rights reserved.}   %  Right footer
+
+\fancypagestyle{CoverStyle}{    %  Define a special header and footer for the cover
+    \fancyhf{}
+    \fancyfoot[R]{\fontsize{9pt}{9pt}\selectfont© 2024 American Speech and Debate Association All rights reserved.}
+}
+
+%  Hyperlink setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue
+}
+
+%  ToC setup
+\setlength{\cftsectionindent}{0pt}
+
+%  Global command & environment changes
+\def\lowspacing{9pt}
+\def\subregspacing{16pt}
+\def\regspacing{19pt}
+\def\hispacing{25pt}
+
+\setlist[itemize]{labelsep=10pt,itemsep=0pt}    %  Set default item and label separation for itemized lists
+
+\newcommand{\timestext}[3]{                     %  Command for text in Times New Roman. Syntax: \timestext<string><ptvalue><bool>
+    \ifthenelse{\equal{#3}{true}}
+    {{\fontspec{Times New Roman}\fontsize{#2}{\dimexpr 1.15pt * #2pt\relax}\selectfont\textbf{#1}}}
+    {{\fontspec{Times New Roman}\fontsize{#2}{\dimexpr 1.15pt * #2pt\relax}\selectfont #1}}
+}
+
+\begin{document}
+
+%  Title Page
+\thispagestyle{CoverStyle}
+\addtocounter{page}{-1}
+
+\begin{center}
+    \begin{vplace}[0.4]
+        \includegraphics[width=0.9815\linewidth,keepaspectratio]{Images/TitlePageLogo.png}\vspace{\hispacing}
+        \timestext{2024-2025}{30pt}{false}\vspace{\lowspacing}\\
+        \timestext{Handbook}{29pt}{false}
+    \end{vplace}
+\end{center}
+
+\newpage
+
+%  Page 1
+\phantomsection\label{sec:NewThisYear}\addcontentsline{toc}{section}{What's New This Year}
+{\noindent\timestext{What's New This Year}{20pt}{true}}\vspace{\hispacing}\\
+
+\phantomsection\label{subsec:General}\addcontentsline{toc}{subsection}{General}
+\timestext{General}{16pt}{false}
+
+\begin{itemize}
+    \item Core Values: Conversational, Collaborative, Kind.
+    \item Adult Representatives are required at tournaments for all students.
+    \item One adult may represent no more than four students.
+    \item Judge Recruitment is the responsibility of every competitor and coach.
+\end{itemize}\vspace{\regspacing}
+
+\phantomsection\label{subsec:SpeechEventChanges}\addcontentsline{toc}{subsection}{Speech Events}
+\noindent\timestext{Speech Events}{16pt}{false}
+
+\begin{itemize}
+    \item Prepared speech time limit is eight minutes.
+    \item Belief \& Values is a new limited preparation event with a pre-determined list of questions. Study the list in advance. Prepare specific sources to support ideas.
+    \item The Belief \& Values Topic Bank is found on page 18.
+    \item Extemporaneous speech events will only be available at Nationals and a few limited online tournaments in 2025.
+\end{itemize}\vspace{\regspacing}
+
+\phantomsection\label{subsec:DebateEventChanges}\addcontentsline{toc}{subsection}{Debate Events}
+\noindent\timestext{Debate Events}{16pt}{false}
+
+\begin{itemize}
+    \item Debate events are conversational (traditional) style rather than progressive style including \\speaking at a conversational rate and refraining from using ad hominem attacks.
+    \item Team Policy round format is different than other leagues with just 2 minutes of cross examination and 3 minutes of rebuttal time.
+\end{itemize}\vspace{\regspacing}
+
+\phantomsection\label{subsec:24-25Resolutions}\addcontentsline{toc}{subsection}{Debate Resolutions for 2024-2025}
+\noindent\timestext{Debate Resolutions for 2024-2025}{16pt}{false}\vspace{\regspacing}\\
+\textcolor{HeaderGrey}{\timestext{2024-2025 ASDA Lincoln-Douglas Debate Resolution}{14pt}{false}}\vspace{\subregspacing}\\
+{In the United States criminal justice system, jury nullification ought to be used in the face of perceived \\injustice.}\vspace{\regspacing}
+
+\noindent\textcolor{HeaderGrey}{\timestext{2024-2025 ASDA Team Policy Debate Resolution}{14pt}{false}}\vspace{\subregspacing}
+{The United States Federal Government should significantly reform its foreign policy toward one or more of the following countries: Belize, Guatemala, Honduras, El Salvador, Nicaragua, and Costa Rica.}
+
+\newpage
+
+%  Page 2
+\phantomsection\label{sec:toc}\addcontentsline{toc}{section}{Table of Contents}
+
+%  Table of Contents stuffs
+
+% Temporarily customize the appearance of \section* for the ToC
+\makeatletter
+    \renewcommand{\cftdotsep}{0.1}
+    \renewcommand{\tableofcontents}{
+        \section*{\fontspec{Times New Roman}\fontsize{20pt}{23pt}\selectfont\textbf{Table of Contents}}
+    \@starttoc{toc}
+}
+\makeatother
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\newpage
+
+%  Page 5
+\phantomsection\label{sec:MissionStatement}\addcontentsline{toc}{section}{Mission Statement}
+\noindent\timestext{1. Mission Statement}{20}{true}
+\end{document}
