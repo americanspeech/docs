@@ -6,7 +6,9 @@
 \usepackage{fancyhdr}   %  Package for headers and footers
 \usepackage{enumitem}   %  Package for more fine control over item lists
 \usepackage{hyperref}   %  Package to allow in-document navigation
-\usepackage{ifthen}     %  Package for more user friendly if-then statements
+\usepackage{needspace}  %  Package to help with auto pagination
+\usepackage{ifthen}     %  Package for more user friendly if-then statements (Needs to be replaced w/ xParse)
+\usepackage{xparse}     %  Package for more fine control 
 \usepackage{amsmath}    %  Package w/ additional fonts
 \usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}  %  Sets the document's paper type
 
@@ -39,17 +41,62 @@
 \def\lowspacing{9pt}
 \def\subregspacing{16pt}
 \def\regspacing{19pt}
-\def\hispacing{25pt}
+\def\hispacing{20pt}
+
+\def\true{true}
 
 \setlist[itemize]{labelsep=10pt,itemsep=0pt}    %  Set default item and label separation for itemized lists
 
-\newcommand{\timestext}[3]{                     %  Command for text in Times New Roman. Syntax: \timestext<string><ptvalue><bool>
+\DeclareDocumentCommand{\sectionHeader}{m o o}{
+    \def\sectionHeaderSize{20pt}
+    \def\sectionHeaderIsBold{false}
+    \IfNoValueF{#2}{\def\sectionHeaderSize{#2}}
+    \IfNoValueF{#3}{\def\sectionHeaderIsBold{#3}}
+
+    \needspace{5\baselineskip}
+    \phantomsection\label{sec:#1}\addcontentsline{toc}{section}{#1}
+    \noindent{
+        \fontspec{Times New Roman}\fontsize{\sectionHeaderSize}{\dimexpr 1.15pt * \sectionHeaderSize\relax}\selectfont
+        \ifx\sectionHeaderIsBold\true
+            \textbf{#1}
+        \else
+            #1
+        \fi
+    }\vspace{\hispacing}\\
+}
+
+\DeclareDocumentCommand{\subsectionHeader}{m o o}{
+    \def\subsectionHeaderSize{16pt}
+    \def\subsectionHeaderIsBold{false}
+    \IfNoValueF{#2}{\def\subsectionHeaderSize{#2}}
+    \IfNoValueF{#3}{\def\subsectionHeaderIsBold{#3}}
+
+    \needspace{5\baselineskip}
+    \phantomsection\label{subsec:#1}\addcontentsline{toc}{subsection}{#1}
+    \noindent{
+        \fontspec{Times New Roman}\fontsize{\subsectionHeaderSize}{\dimexpr 1.15pt * \subsectionHeaderSize\relax}\selectfont
+        \ifx\subsectionHeaderIsBold\true
+            \textbf{#1}
+        \else
+            #1
+        \fi
+    }
+}
+
+\DeclareDocumentCommand{\timestext}{m o o}{
+    \def\timesTextSize{14pt}
+    \def\timesTextIsBold{false}
+
+    \IfNoValueF{#2}{\def\timesTextSize{#2}}
+    \IfNoValueF{#3}{\def\timesTextIsBold{#3}}
+
+
     \ifthenelse{\equal{#3}{true}}
     {{\fontspec{Times New Roman}\fontsize{#2}{\dimexpr 1.15pt * #2pt\relax}\selectfont\textbf{#1}}}
     {{\fontspec{Times New Roman}\fontsize{#2}{\dimexpr 1.15pt * #2pt\relax}\selectfont #1}}
 }
 
-\newcommand{\p}[1]{
+\DeclareDocumentCommand{\p}{m}{
     {#1}\vspace{\subregspacing}\\
 }
 
@@ -70,11 +117,15 @@
 \newpage
 
 %  Page 1
-\phantomsection\label{sec:NewThisYear}\addcontentsline{toc}{section}{What's New This Year}
-{\noindent\timestext{What's New This Year}{20pt}{true}}\vspace{\hispacing}\\
+%\phantomsection\label{sec:NewThisYear}\addcontentsline{toc}{section}{What's New This Year}
+%{\noindent\timestext{What's New This Year}{20pt}{true}}\vspace{\hispacing}\\
 
-\phantomsection\label{subsec:General}\addcontentsline{toc}{subsection}{General}
-\noindent\timestext{General}{16pt}{false}
+\sectionHeader{What's New This Year}[20]
+
+%\phantomsection\label{subsec:General}\addcontentsline{toc}{subsection}{General}
+%\noindent\timestext{General}{16pt}{false}
+
+\subsectionHeader{General}
 
 \begin{itemize}
     \item Core Values: Conversational, Collaborative, Kind. (\textcolor{blue}{\uline{\hyperref[subsec:CoreValues]{Page 4}}})
