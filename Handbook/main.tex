@@ -7,7 +7,6 @@
 \usepackage{enumitem}   %  Package for more fine control over item lists
 \usepackage{hyperref}   %  Package to allow in-document navigation
 \usepackage{needspace}  %  Package to help with auto pagination
-\usepackage{ifthen}     %  Package for more user friendly if-then statements (Needs to be replaced w/ xParse)
 \usepackage{xparse}     %  Package for more fine control 
 \usepackage{amsmath}    %  Package w/ additional fonts
 \usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}  %  Sets the document's paper type
@@ -90,10 +89,14 @@
     \IfNoValueF{#2}{\def\timesTextSize{#2}}
     \IfNoValueF{#3}{\def\timesTextIsBold{#3}}
 
-
-    \ifthenelse{\equal{#3}{true}}
-    {{\fontspec{Times New Roman}\fontsize{#2}{\dimexpr 1.15pt * #2pt\relax}\selectfont\textbf{#1}}}
-    {{\fontspec{Times New Roman}\fontsize{#2}{\dimexpr 1.15pt * #2pt\relax}\selectfont #1}}
+    \noindent{
+        \fontspec{Times New Roman}\fontsize{\timesTextSize}{\dimexpr 1.15pt * \timesTextSize\relax}\selectfont
+        \ifx\timesTextIsBold\true
+            \textbf{#1}
+        \else
+            #1
+        \fi
+    }
 }
 
 \DeclareDocumentCommand{\p}{m}{
@@ -109,8 +112,8 @@
 \begin{center}
     \begin{vplace}[0.4]
         \includegraphics[width=0.9815\linewidth,keepaspectratio]{Images/TitlePageLogo.png}\vspace{\hispacing}
-        \timestext{2024-2025}{30pt}{false}\vspace{\lowspacing}\\
-        \timestext{Handbook}{29pt}{false}
+        \timestext{2024-2025}[30]\vspace{\lowspacing}\\
+        \timestext{Handbook}[29]
     \end{vplace}
 \end{center}
 
@@ -205,9 +208,8 @@
 \p{Collaborative: “I will work peaceably with others to accomplish the mission of American Speech and Debate Association. I will help prepare the next generation of leaders as I attempt to communicate my ideas, beliefs and values effectively while maintaining respect for differing views. I will do my best to help others.”}
 \p{Kind: “I will be kind and polite in all my words to and about other people, whether or not they are present and whether or not I agree with them.”}
 
-\newpage
 
 %  Page 6
 \phantomsection\label{subsec:TourConduct}\addcontentsline{toc}{subsection}{Tournament Code of Conduct}
-\noindent\timestext{Tournament Code of Conduct}{16}{false}\vspace{\regspacing}\\
+\noindent\timestext{Tournament Code of Conduct}[16]\vspace{\regspacing}\\
 \end{document}
